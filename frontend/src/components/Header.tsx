@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import usePopup from "../hooks/usePopup";
+import Login from "../pages/Login";
 
 function Header() {
+    const popup = usePopup();
     return (
+        <>
         <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-800 bg-slate-950">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
@@ -20,6 +24,12 @@ function Header() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden items-center gap-6 md:flex lg:gap-8">
+                      <Link
+                        to="/"
+                        className="text-sm text-slate-400 transition hover:text-white"
+                    >
+                       Home
+                    </Link>
 
                     <Link
                         to="/how-it-works"
@@ -41,7 +51,14 @@ function Header() {
                     >
                         Help
                     </Link>
-
+                      <Link
+                        
+                       to="/login"
+                        className="text-sm text-slate-400 transition hover:text-white"
+                    >
+                        Sign In
+                    </Link>
+                    
                     <Link
                         to="/register"
                         className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800"
@@ -74,6 +91,8 @@ function Header() {
 
             </div>
         </header>
+       
+    </>
     );
 }
 
