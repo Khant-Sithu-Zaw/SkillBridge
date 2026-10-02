@@ -4,14 +4,10 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 
 function Login() {
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         console.log("Login submitted");
-    };
-
-    const handleGoogleLogin = () => {
-        console.log("Google login");
     };
 
     return (
@@ -27,32 +23,6 @@ function Login() {
 
                 {/* Card */}
                 <div className=" rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-2xl shadow-black/30 sm:p-8">
-
-                    {/* Google */}
-                    <Button
-                        type="button"
-                        variant="outline"
-                        fullWidth
-                        onClick={handleGoogleLogin}
-                        className="flex items-center justify-center gap-3"
-                    >
-                        <span className="font-bold text-blue-400">
-                            G
-                        </span>
-
-                        Continue with Google
-                    </Button>
-
-                    {/* Divider */}
-                    <div className="my-6 flex items-center gap-3">
-                        <div className="h-px flex-1 bg-slate-800" />
-
-                        <span className="text-xs uppercase tracking-wider text-slate-500">
-                            Or
-                        </span>
-
-                        <div className="h-px flex-1 bg-slate-800" />
-                    </div>
 
                     <form
                         onSubmit={handleSubmit}

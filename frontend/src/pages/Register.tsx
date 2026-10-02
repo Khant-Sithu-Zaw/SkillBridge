@@ -8,7 +8,7 @@ type AccountType = "USER" | "PRO";
 function Register() {
     const [accountType, setAccountType] = useState<AccountType>("USER");
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
@@ -20,7 +20,6 @@ function Register() {
             password: formData.get("password"),
             confirmPassword: formData.get("confirmPassword"),
 
-            // Pro user fields
             headline: formData.get("headline"),
             mainSkill: formData.get("mainSkill"),
             yearsOfExperience: formData.get("yearsOfExperience"),
@@ -30,7 +29,17 @@ function Register() {
             portfolioUrl: formData.get("portfolioUrl"),
         };
 
-        console.log("Registration submitted:", data);
+        const response = await fetch("http://localhost:3000/users/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        console.log("Registration response:", result);
     };
 
     return (
@@ -57,8 +66,8 @@ function Register() {
                         type="button"
                         onClick={() => setAccountType("USER")}
                         className={`rounded-xl border p-4 text-left transition ${accountType === "USER"
-                                ? "border-blue-500 bg-blue-500/10"
-                                : "border-slate-800 bg-slate-900 hover:border-slate-700"
+                            ? "border-blue-500 bg-blue-500/10"
+                            : "border-slate-800 bg-slate-900 hover:border-slate-700"
                             }`}
                     >
                         <div className="text-sm font-semibold text-white">
@@ -74,8 +83,8 @@ function Register() {
                         type="button"
                         onClick={() => setAccountType("PRO")}
                         className={`rounded-xl border p-4 text-left transition ${accountType === "PRO"
-                                ? "border-blue-500 bg-blue-500/10"
-                                : "border-slate-800 bg-slate-900 hover:border-slate-700"
+                            ? "border-blue-500 bg-blue-500/10"
+                            : "border-slate-800 bg-slate-900 hover:border-slate-700"
                             }`}
                     >
                         <div className="text-sm font-semibold text-white">
